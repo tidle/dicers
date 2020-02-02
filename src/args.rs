@@ -27,8 +27,6 @@ impl Args {
             .get_matches();
         let long = app.is_present("long");
         let manual = app.is_present("manual");
-        Args {
-            long, manual
-        }
+        Args { long, manual }
     }
 }

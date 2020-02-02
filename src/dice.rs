@@ -14,7 +14,11 @@ pub fn roll(ask: bool, long: bool) -> Roll {
             print!("Input a dice roll from 1 to 6: ");
             // Flush stdout so that the prompt appears
             use std::io::Write;
-            std::io::stdout().lock().flush().ok().expect("Could not flush stdout");
+            std::io::stdout()
+                .lock()
+                .flush()
+                .ok()
+                .expect("Could not flush stdout");
 
             let value = std::io::stdin()
                 .lock()
@@ -36,7 +40,7 @@ pub fn roll(ask: bool, long: bool) -> Roll {
             rolls.push(value);
         } else {
             // Fix this. Not secure
-            rolls.push(thread_rng().gen_range(1,7));
+            rolls.push(thread_rng().gen_range(1, 7));
         }
     }
 
