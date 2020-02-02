@@ -7,23 +7,37 @@ use dice::Roll::*;
 
 fn main() {
     let args = Args::new();
-    let result = roll(args.manual, args.long);
-    match result {
-        Roll4(v) => println!(
-            "{}",
-            short_word(v).unwrap_or_else(|e| {
-                eprintln!("Error getting word: {}", e);
-                std::process::exit(128)
-            })
-        ),
-        Roll5(v) => println!(
-            "{}",
-            long_word(v).unwrap_or_else(|e| {
-                eprintln!("Error getting word: {}", e);
-                std::process::exit(128)
-            })
-        ),
+    for _ in 0..args.words {
+        let result = roll(args.manual, args.long);
+        match result {
+            Roll4(v) => print!(
+                "{} ",
+                short_word(v).unwrap_or_else(|e| {
+                    eprintln!("Error getting word: {}", e);
+                    std::process::exit(128)
+                })
+            ),
+            Roll5(v) => print!(
+                "{} ",
+                long_word(v).unwrap_or_else(|e| {
+                    eprintln!("Error getting word: {}", e);
+                    std::process::exit(128)
+                })
+            ),
+        }
     }
+
+    println!();
+
+    // Prevent an overflow in the following code
+    if args.words * if args.long { 5 } else { 4 } > 48 {
+        println!("Your password is complex enough");
+        return;
+    }
+    println!(
+        "Password complexity (Number of possible passwords with given settings): {}",
+        6u128.pow(args.words as u32 * if args.long { 5 } else { 4 })
+    )
 }
 
 fn short_word(dice: [u8; 4]) -> std::io::Result<String> {
@@ -49,7 +63,7 @@ fn word(match_str: &str, filename: &str) -> std::io::Result<String> {
         if let Some(0) = line.find(match_str) {
             result = String::from(match line.split("\t").nth(1) {
                 Some(s) => s,
-                None => "",
+                None => "[error]",
             });
             break;
         }

@@ -4,6 +4,7 @@ use clap::Arg;
 pub struct Args {
     pub long: bool,
     pub manual: bool,
+    pub words: usize,
 }
 
 impl Args {
@@ -24,9 +25,30 @@ impl Args {
                     .long("manual")
                     .help("manually input dice rolls rather than using the computer"),
             )
+            .arg(
+                Arg::with_name("WORD COUNT")
+                    .short("w")
+                    .long("words")
+                    .default_value("6")
+                    .takes_value(true)
+                    .help("length of password"),
+            )
             .get_matches();
         let long = app.is_present("long");
         let manual = app.is_present("manual");
-        Args { long, manual }
+        let words = app
+            .value_of("WORD COUNT")
+            .unwrap()
+            .parse()
+            .unwrap_or_else(|e| {
+                eprintln!("Invalid number: {}", e);
+                std::process::exit(60);
+            });
+
+        Args {
+            long,
+            manual,
+            words,
+        }
     }
 }
