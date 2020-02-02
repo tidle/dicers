@@ -8,7 +8,7 @@ pub enum Roll {
 
 pub fn roll(ask: bool, long: bool) -> Roll {
     let lim = if long { 6 } else { 4 };
-    let mut rolls = vec![0u8; lim];
+    let mut rolls = Vec::with_capacity(lim);
     for _ in 0..lim {
         if ask {
             print!("Input a dice roll from 1 to 6: ");
@@ -30,7 +30,7 @@ pub fn roll(ask: bool, long: bool) -> Roll {
             rolls.push(value);
         } else {
             // Fix this. Not secure and favors 1-4 over 5-6
-            rolls.push(random::<u8>() % 6 + 1);
+            rolls.push((random::<u8>() % 6) + 1);
         }
     }
 
