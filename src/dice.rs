@@ -25,7 +25,7 @@ pub fn roll(ask: bool, long: bool) -> Roll {
                 .unwrap_or_else(|e| {
                     // Unwrap it and print the error
                     eprintln!("Error reading input: {}", e);
-                    std::process::exit(1)
+                    std::process::exit(127)
                 });
             rolls.push(value);
         } else {
