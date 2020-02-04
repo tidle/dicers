@@ -10,7 +10,7 @@ pub struct Args {
 impl Args {
     pub fn new() -> Args {
         let app = App::new("dicers")
-            .version("0.1")
+            .version("0.2")
             .about("generates a diceware password")
             .author("tidle")
             .arg(
