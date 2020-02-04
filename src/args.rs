@@ -5,12 +5,13 @@ pub struct Args {
     pub long: bool,
     pub manual: bool,
     pub words: usize,
+    pub wordlist: Option<String>,
 }
 
 impl Args {
     pub fn new() -> Args {
         let app = App::new("dicers")
-            .version("0.2")
+            .version("0.3")
             .about("generates a diceware password")
             .author("tidle")
             .arg(
@@ -24,6 +25,13 @@ impl Args {
                     .short("m")
                     .long("manual")
                     .help("manually input dice rolls rather than using the computer"),
+            )
+            .arg(
+                Arg::with_name("FILE")
+                    .short("f")
+                    .long("file")
+                    .takes_value(true)
+                    .help("manually specify a wordlist, rather than using the built in wordlists"),
             )
             .arg(
                 Arg::with_name("WORD COUNT")
@@ -44,11 +52,13 @@ impl Args {
                 eprintln!("Invalid number: {}", e);
                 std::process::exit(60);
             });
+        let wordlist = app.value_of("FILE").map(|x| x.to_string());
 
         Args {
             long,
             manual,
             words,
+            wordlist,
         }
     }
 }

@@ -1,5 +1,6 @@
 mod args;
 mod dice;
+mod dat;
 
 use args::Args;
 use dice::roll;
@@ -14,14 +15,14 @@ fn main() {
         password.push_str(&match result {
             Roll4(v) => format!(
                 "{} ",
-                short_word(v).unwrap_or_else(|e| {
+                short_word(v, &args.wordlist).unwrap_or_else(|e| {
                     eprintln!("Error getting word: {}", e);
                     std::process::exit(128)
                 })
             ),
             Roll5(v) => format!(
                 "{} ",
-                long_word(v).unwrap_or_else(|e| {
+                long_word(v, &args.wordlist).unwrap_or_else(|e| {
                     eprintln!("Error getting word: {}", e);
                     std::process::exit(128)
                 })
@@ -42,22 +43,27 @@ fn main() {
     )
 }
 
-fn short_word(dice: [DiceFace; 4]) -> std::io::Result<String> {
+fn short_word(dice: [DiceFace; 4], wordlist: &Option<String>) -> std::io::Result<String> {
     let match_str = format!("{}{}{}{}", dice[0], dice[1], dice[2], dice[3]);
-    word(&match_str, "list4.txt")
+    word(&match_str, wordlist, dat::LIST4)
 }
 
-fn long_word(dice: [DiceFace; 5]) -> std::io::Result<String> {
+fn long_word(dice: [DiceFace; 5], wordlist: &Option<String>) -> std::io::Result<String> {
     let match_str = format!("{}{}{}{}{}", dice[0], dice[1], dice[2], dice[3], dice[4]);
-    word(&match_str, "list5.txt")
+    word(&match_str, wordlist, dat::LIST5)
 }
 
-fn word(match_str: &str, filename: &str) -> std::io::Result<String> {
+fn word(match_str: &str, filename: &Option<String>, fblist: &str) -> std::io::Result<String> {
     use std::io::BufRead;
     use std::{fs, io};
 
-    let wordlist = fs::File::open(filename)?;
-    let wordlist = io::BufReader::new(wordlist);
+    let wordlist : Box<dyn BufRead>;
+    if let Some(f) = filename {
+        let w = fs::File::open(f)?;
+        wordlist = Box::new(io::BufReader::new(w));
+    } else {
+        wordlist = Box::new(io::BufReader::new(fblist.as_bytes()))
+    }
     let mut result = String::new();
 
     for line in wordlist.lines() {
