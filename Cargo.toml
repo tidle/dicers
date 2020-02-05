@@ -1,5 +1,5 @@
 [package]
-name = "dicers"
+name = "rsdice"
 version = "0.3.0"
 authors = ["Tidle <tidle@users.noreply.github.com>"]
 edition = "2018"
