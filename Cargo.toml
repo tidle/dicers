@@ -3,6 +3,10 @@ name = "dicers"
 version = "0.3.0"
 authors = ["Tidle <tidle@users.noreply.github.com>"]
 edition = "2018"
+description = "a diceware password generator written in rust"
+repository = "https://github.com/tidle/dicers"
+license = "MIT AND Apache-2"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
