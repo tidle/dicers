@@ -38,11 +38,17 @@ pub fn roll(ask: bool, long: bool) -> Roll {
                 });
             // Ensure value is in the proper bounds
             let value = (value - 1) % 6 + 1;
-            let value = value.into();
+            let value = match DiceFace::new(value) {
+                Some(v) => v,
+                None => {
+                    eprintln!("please enter a valid dice roll");
+                    continue;
+                }
+            };
             rolls.push(value);
         } else {
             // Fix this. Not secure
-            rolls.push(thread_rng().gen_range(1, 7).into());
+            rolls.push(DiceFace::new(thread_rng().gen_range(1, 7)).unwrap());
         }
     }
 
@@ -80,13 +86,6 @@ mod dice_face {
     impl From<DiceFace> for u8 {
         fn from(df: DiceFace) -> u8 {
             df.val()
-        }
-    }
-
-    impl From<u8> for DiceFace {
-        /// Note: this defaults to 1 if u8 is not a valid DiceFace
-        fn from(v: u8) -> DiceFace {
-            DiceFace::new(v).unwrap_or(DiceFace::new(1).unwrap())
         }
     }
 
