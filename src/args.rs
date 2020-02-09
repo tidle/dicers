@@ -19,7 +19,7 @@ impl Args {
                 Arg::with_name("long")
                     .short("l")
                     .long("long")
-                    .help("use the six dice word list instead of the four dice one"),
+                    .help("use the five dice word list instead of the four dice one"),
             )
             .arg(
                 Arg::with_name("manual")
