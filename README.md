@@ -1,5 +1,5 @@
-# Dicers
-**Dicers is a diceware password generator written in rust**
+# Rsdice
+**Rsdice is a diceware password generator written in rust**
 
 ## Installation
 ### Cargo
@@ -7,9 +7,9 @@ The recommended way to install dicers is through `cargo install`.
 Assuming you have cargo installed, this will compile dicers and add it to your path.
 ### Executables
 Executables for your platform may be available in the latest release.
-Check the releases tab of the github page (https://github.com/tidle/dicers/)
+Check the releases tab of the github page (https://github.com/tidle/rsdice/)
 ### Source
-Simply execute `cargo build --release`, and the `dicers` executable will be found at `target/release/dicers`
+Simply execute `cargo build --release`, and the `rsdice` executable will be found at `target/release/rsdice`
 
 ## Use
 You can run dicers with no arguments and it will generate a password with six words using the short wordlist.
