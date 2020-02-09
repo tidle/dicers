@@ -11,8 +11,8 @@ pub struct Args {
 
 impl Args {
     pub fn new() -> Args {
-        let app = App::new("dicers")
-            .version("0.3")
+        let app = App::new("rsdice")
+            .version("1.0")
             .about("generates a diceware password")
             .author("tidle")
             .arg(
