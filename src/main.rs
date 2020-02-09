@@ -1,6 +1,6 @@
 mod args;
-mod dice;
 mod dat;
+mod dice;
 
 use args::Args;
 use dice::roll;
@@ -57,7 +57,7 @@ fn word(match_str: &str, filename: &Option<String>, fblist: &str) -> std::io::Re
     use std::io::BufRead;
     use std::{fs, io};
 
-    let wordlist : Box<dyn BufRead>;
+    let wordlist: Box<dyn BufRead>;
     if let Some(f) = filename {
         let w = fs::File::open(f)?;
         wordlist = Box::new(io::BufReader::new(w));
