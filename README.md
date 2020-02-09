@@ -16,13 +16,15 @@ You can run dicers with no arguments and it will generate a password with six wo
 For password customization, please refer to the help message:
 ```
 USAGE:
-    dicers [FLAGS] [OPTIONS]
+    rsdice [FLAGS] [OPTIONS]
 
 FLAGS:
-    -h, --help       Prints help information
-    -l, --long       use the six dice word list instead of the four dice one
-    -m, --manual     manually input dice rolls rather than using the computer
-    -V, --version    Prints version information
+    -h, --help        Prints help information
+    -i, --internet    get random numbers from an internet source (random.org) rather than using the built in random
+                      number generation
+    -l, --long        use the six dice word list instead of the four dice one
+    -m, --manual      manually input dice rolls rather than using the computer
+    -V, --version     Prints version information
 
 OPTIONS:
     -f, --file <FILE>           manually specify a wordlist, rather than using the built in wordlists
