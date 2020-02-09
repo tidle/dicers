@@ -1,3 +1,4 @@
+use super::args::Args;
 pub use dice_face::DiceFace;
 use rand::prelude::*;
 use std::io::BufRead;
@@ -7,7 +8,14 @@ pub enum Roll {
     Roll5([DiceFace; 5]),
 }
 
-pub fn roll(ask: bool, long: bool) -> Roll {
+pub fn roll(config: &Args) -> Roll {
+    if config.inet {
+        return super::inet_rand::roll(&config);
+    }
+
+    let long = config.long;
+    let ask = config.manual;
+
     let lim = if long { 5 } else { 4 };
     let mut rolls = Vec::with_capacity(lim);
     for _ in 0..lim {

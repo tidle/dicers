@@ -1,6 +1,7 @@
 mod args;
 mod dat;
 mod dice;
+mod inet_rand;
 
 use args::Args;
 use dice::roll;
@@ -11,7 +12,7 @@ fn main() {
     let args = Args::new();
     let mut password = String::new();
     for _ in 0..args.words {
-        let result = roll(args.manual, args.long);
+        let result = roll(&args);
         password.push_str(&match result {
             Roll4(v) => format!(
                 "{} ",

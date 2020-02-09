@@ -5,6 +5,7 @@ pub struct Args {
     pub long: bool,
     pub manual: bool,
     pub words: usize,
+    pub inet: bool,
     pub wordlist: Option<String>,
 }
 
@@ -25,6 +26,13 @@ impl Args {
                     .short("m")
                     .long("manual")
                     .help("manually input dice rolls rather than using the computer"),
+            )
+            .arg(
+                Arg::with_name("inet")
+                    .short("i")
+                    .long("internet")
+                    .conflicts_with("manual")
+                    .help("get random numbers from an internet source (random.org) rather than using the built in random number generation"),
             )
             .arg(
                 Arg::with_name("FILE")
@@ -53,12 +61,14 @@ impl Args {
                 std::process::exit(60);
             });
         let wordlist = app.value_of("FILE").map(|x| x.to_string());
+        let inet = app.is_present("inet");
 
         Args {
             long,
             manual,
             words,
             wordlist,
+            inet,
         }
     }
 }
