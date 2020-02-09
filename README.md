@@ -3,8 +3,8 @@
 
 ## Installation
 ### Cargo
-The recommended way to install dicers is through `cargo install`.
-Assuming you have cargo installed, this will compile dicers and add it to your path.
+The recommended way to install rsdice is through `cargo install`.
+Assuming you have cargo installed, this will compile rsdice and add it to your path.
 ### Executables
 Executables for your platform may be available in the latest release.
 Check the releases tab of the github page (https://github.com/tidle/rsdice/)
@@ -12,7 +12,7 @@ Check the releases tab of the github page (https://github.com/tidle/rsdice/)
 Simply execute `cargo build --release`, and the `rsdice` executable will be found at `target/release/rsdice`
 
 ## Use
-You can run dicers with no arguments and it will generate a password with six words using the short wordlist.
+You can run rsdice with no arguments and it will generate a password with six words using the short wordlist.
 For password customization, please refer to the help message:
 ```
 USAGE:

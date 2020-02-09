@@ -1,10 +1,10 @@
 [package]
 name = "rsdice"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Tidle <tidle@users.noreply.github.com>"]
 edition = "2018"
 description = "a diceware password generator written in rust"
-repository = "https://github.com/tidle/dicers"
+repository = "https://github.com/tidle/rsdice"
 license = "MIT AND Apache-2.0"
 readme = "README.md"
 
