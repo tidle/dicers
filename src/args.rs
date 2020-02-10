@@ -2,7 +2,7 @@ use clap::App;
 use clap::Arg;
 
 pub struct Args {
-    pub long: bool,
+    pub short: bool,
     pub manual: bool,
     pub words: usize,
     pub inet: bool,
@@ -16,10 +16,10 @@ impl Args {
             .about("generates a diceware password")
             .author("tidle")
             .arg(
-                Arg::with_name("long")
-                    .short("l")
-                    .long("long")
-                    .help("use the five dice word list instead of the four dice one"),
+                Arg::with_name("short")
+                    .short("s")
+                    .long("short")
+                    .help("use the four dice word list instead of the five dice one"),
             )
             .arg(
                 Arg::with_name("manual")
@@ -50,7 +50,7 @@ impl Args {
                     .help("length of password"),
             )
             .get_matches();
-        let long = app.is_present("long");
+        let short = app.is_present("short");
         let manual = app.is_present("manual");
         let words = app
             .value_of("WORD COUNT")
@@ -64,7 +64,7 @@ impl Args {
         let inet = app.is_present("inet");
 
         Args {
-            long,
+            short,
             manual,
             words,
             wordlist,

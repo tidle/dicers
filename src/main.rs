@@ -34,13 +34,13 @@ fn main() {
     println!("{}", password);
 
     // Prevent an overflow in the following code
-    if args.words * if args.long { 5 } else { 4 } > 48 {
+    if args.words * if args.short { 4 } else { 5 } > 48 {
         println!("Your password is complex enough");
         return;
     }
     println!(
         "Password complexity (Number of possible passwords with given settings): {}",
-        6u128.pow(args.words as u32 * if args.long { 5 } else { 4 })
+        6u128.pow(args.words as u32 * if args.short { 4 } else { 5 })
     )
 }
 
