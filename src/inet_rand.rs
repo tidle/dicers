@@ -2,7 +2,7 @@ use super::args::Args;
 use super::dice::{DiceFace, Roll};
 
 pub fn roll(config: &Args) -> Roll {
-    let count = if config.long { 4 } else { 5 };
+    let count = if config.short { 5 } else { 4 };
 
     eprintln!("starting request...");
     let res: Vec<DiceFace> = ureq::get("https://random.org/integers/")

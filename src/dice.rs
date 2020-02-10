@@ -13,10 +13,10 @@ pub fn roll(config: &Args) -> Roll {
         return super::inet_rand::roll(&config);
     }
 
-    let long = config.long;
+    let short = config.short;
     let ask = config.manual;
 
-    let lim = if long { 5 } else { 4 };
+    let lim = if short { 4 } else { 5 };
     let mut rolls = Vec::with_capacity(lim);
     for _ in 0..lim {
         if ask {
@@ -60,10 +60,10 @@ pub fn roll(config: &Args) -> Roll {
         }
     }
 
-    if long {
-        Roll::Roll5([rolls[0], rolls[1], rolls[2], rolls[3], rolls[4]])
-    } else {
+    if short {
         Roll::Roll4([rolls[0], rolls[1], rolls[2], rolls[3]])
+    } else {
+        Roll::Roll5([rolls[0], rolls[1], rolls[2], rolls[3], rolls[4]])
     }
 }
 
